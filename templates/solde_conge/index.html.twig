@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}liste SoldeConge et demandes {% endblock %}
+
+{% block body %}
+    <h1>liste des SoldeConge</h1>
+
+    <table border=1,class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_Employe</th>
+                <th>Solde_compensation</th>
+                <th>Solde_maladie</th>
+                <th>Solde_exception</th>
+                <th>Solde_annuel</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for solde_conge in solde_conges %}
+            <tr>
+                <td>{{ solde_conge.id }}</td>
+                <td>{{ solde_conge.employe }}</td>
+                <td>{{ solde_conge.soldeCompensation }}</td>
+                <td>{{ solde_conge.soldeMaladie }}</td>
+                <td>{{ solde_conge.soldeException }}</td>
+                <td>{{ solde_conge.soldeAnnuel }}</td>
+                <td>
+                    <a href="{{ path('app_solde_conge_show', {'id': solde_conge.id}) }}">show</a>
+                    <a href="{{ path('app_solde_conge_edit', {'id': solde_conge.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_solde_conge_new') }}">Create new</a>
+
+    <h1>liste des demandes de Conge</h1>
+
+     <table border=2,class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_Employe</th>
+                
+                <th>Datedepart</th>
+                <th>Dateretour</th>
+                <th>Nb_jours</th>
+                <th>Type</th>
+                <th>Motif</th>
+                <th>ETAT</th>
+                <th>traitement</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conge in conges %}
+            <tr>
+                <td>{{ conge.id }}</td>
+                <td>{{ conge.employe}}</td>
+                
+                <td>{{ conge.datedepart ? conge.datedepart|date('Y-m-d') : '' }}</td>
+                <td>{{ conge.dateretour ? conge.dateretour|date('Y-m-d') : '' }}</td>
+                <td>{{ conge.nbJours }}</td>
+                <td>{{ conge.type }}</td>
+                <td>{{ conge.motif }}</td>
+                <td>{{ conge.etat }}</td>
+                
+                 <td>
+                    <a href="{% set etat ='accepter'%}">accepter</a>
+                    <a href="{% set etat ='refuser' %}">refuser</a>
+                </td>
+               
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

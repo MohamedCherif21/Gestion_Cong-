@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SoldeConge{% endblock %}
+
+{% block body %}
+    <h1>Edit SoldeConge</h1>
+
+    {{ include('solde_conge/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_solde_conge_index') }}">back to list</a>
+
+    {{ include('solde_conge/_delete_form.html.twig') }}
+    
+{% endblock %}
